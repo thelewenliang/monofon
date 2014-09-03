@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -67,15 +69,21 @@ public class Manafon {
             GridBagConstraints c = new GridBagConstraints();
             c.weightx = 0.2;
             c.weighty = 0.8;
-
-            table = new JTable(2, 20);
-            table.setShowGrid(true);
-
+            
+            String Header[] = {"Name","Type","Cache","Default"};
+            String Data[][] = {{null,null,null,null}};
+            table = new JTable(Data, Header);
+            table.setFillsViewportHeight(true);
+            table.editCellAt(2, 2);
+            JScrollPane tableScrollPanel = new JScrollPane(table);
+            c.fill = GridBagConstraints.BOTH;
             c.gridx = 0;
             c.gridy = 0;
             c.gridwidth = 2;
-            add(table, c);
+            add(tableScrollPanel, c);
+            //return to default
             c.gridwidth = 1;
+            c.fill = GridBagConstraints.NONE;
 
             JButton addButton = new JButton("Add");
             c.gridx = 0;
